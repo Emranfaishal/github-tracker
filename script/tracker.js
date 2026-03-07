@@ -4,7 +4,6 @@ const closedButton = document.getElementById('closed');
 const allSection = document.getElementById('all-section');
 const loadingSpinner = document.getElementById('loading-spinner');
 const totalCount = document.getElementById('total');
-// console.log(totalCount);
 
 let all = [];
 
@@ -15,6 +14,9 @@ async function allTracker() {
     const data = await res.json();
     loadingSpinner.classList.add('hidden');
     const total = data.data;
+  
+    console.log(total.length);
+
     all = total;
     allSection.innerHTML = '';
     tracker(total);
@@ -90,8 +92,7 @@ function showModal(id) {
                         <button class="btn btn-primary">Close</button>
                     </form>
                 </div>
-    
-    
+      
     `;
     document.getElementById('my_modal_5').showModal();
 
@@ -136,3 +137,18 @@ function tracker(events) {
     });
 };
 allTracker();
+
+document.getElementById("btn-search").addEventListener('click', function () {
+    const input = document.getElementById('input-search');
+    const searchValue = input.value.trim().toLowerCase();
+    // console.log(searchValue);
+
+    fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q={searchText}')
+        .then(res => res.json())
+        .then(data => {
+            const word = data.data;
+            // console.log(word);
+            const filterWord = word.filter(words => words.title.toLowerCase().includes(searchValue));
+            tracker(filterWord);
+        });
+})

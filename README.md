@@ -1,6 +1,3 @@
-# Assignment-05: GitHub Issues Tracker
-
-
 ### **API Endpoints:**
 ###  **All Issues:** 
   - https://phi-lab-server.vercel.app/api/v1/lab/issues 
@@ -16,8 +13,6 @@
 
    - Example:  https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=notifications
 
-
----
 ## 📤 What to submit
 
 - **GitHub Repository Link:**
