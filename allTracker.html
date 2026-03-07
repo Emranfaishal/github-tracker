@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gray-200">
+<body class="w-10/12 mx-auto">
     <!-- header title tag  -->
     <header>
         <nav class="mt-2">
@@ -40,25 +40,23 @@
             </div>
         </nav>
     </header>
-    <main class="w-10/12 mx-auto">
+    <main>
 
         <section class="flex gap-5 bg-white rounded-sm shadow-2xl p-5 mt-10">
-            <button onclick="btnClick('all')" id="all"
-                class="p-4 border rounded-2xl shadow">All</button>
-            <button onclick="btnClick('open')" id="open"
-                class="p-4 border rounded-2xl shadow">Open</button>
-            <button onclick="btnClick('closed')" id="closed"
-                class="p-4 border rounded-2xl shadow">Closed</button>
+            <button onclick="btnClick('all')" id="all" class="btn shadow">All</button>
+            <button onclick="btnClick('open')" id="open" class="btn shadow">Open</button>
+            <button onclick="btnClick('closed')" id="closed" class="btn shadow">Closed</button>
         </section>
 
         <section class="navbar bg-base-100 rounded-sm shadow-sm p-5 mt-10">
             <div class="flex-1">
                 <div class="flex justify-self-start items-center gap-2">
-                    <div class="bg-[#4A00FF40] rounded-4xl">
-                        <img class="w-10" src="assets/Aperture.png" alt="">
+                    <div class="bg-[#4A00FF40] rounded-full p-2 ">
+                        <!-- <img class="w-10" src="assets/Aperture.png" alt=""> -->
+                        <i class="w-ful h-full fa-brands fa-microsoft"></i>
                     </div>
                     <div>
-                        <p class="font-semibold"><span>0</span> Issues</p>
+                        <p class="font-semibold"><span id="total">0</span> Issues</p>
                         <p class="text-[#64748B]">Track and manage your project issues</p>
                     </div>
                 </div>
@@ -74,37 +72,27 @@
         </section>
 
         <section class="mt-10">
+
             <div id="loading-spinner" class="justify-center items-center p-20 hidden">
                 <span class="loading loading-spinner text-warning"></span>
             </div>
-            <div id="all-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
 
-
-                <!-- <div class="bg-white rounded-sm shadow-2xl p-7 space-y-4">
-                    <div class="flex justify-between items-center">
-                        <p class="bg-[#00A96E] p-1 rounded-full"><i class="fa-regular fa-circle"></i></p>
-                        <p class="bg-[#FEECEC] pl-4 pr-4 rounded-2xl">High</p>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-black">Fix navigation menu on mobile devices</h3>
-                        <p class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
-                        <div class="flex gap-3 mt-5">
-                            <button class="btn bg-[#EF444420] rounded-2xl text-red-400 "><i
-                                    class="fa-solid fa-snowman"></i> Bug</button>
-                            <button class="btn bg-[#FDE68A20] rounded-2xl text-red-400 "><i
-                                    class="fa-solid fa-snowman"></i> help wanted</button>
-                        </div>
-                    </div>
-                    <hr class="text-[#64748B]">
-                    <div>
-                        <p class="text-[#64748B] mb-3">#1by john_doe</p>
-                        <p class="text-[#64748B]">1/15/2024</p>
-                    </div>
-                </div> -->
+            <div id="all-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
             </div>
 
         </section>
+
+        <section>
+            <!-- Open the modal using ID.showModal() method -->
+            <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                <div id="modal" class="modal-box space-y-4">
+
+                </div>
+            </dialog>
+        </section>
+
+
 
     </main>
     <script src="script/tracker.js"></script>
