@@ -6,6 +6,8 @@ const loadingSpinner = document.getElementById('loading-spinner');
 const totalCount = document.getElementById('total');
 
 let all = [];
+let openIssues = [];
+let closedIssues = [];
 
 async function allTracker() {
     loadingSpinner.classList.remove('hidden');
@@ -14,8 +16,12 @@ async function allTracker() {
     const data = await res.json();
     loadingSpinner.classList.add('hidden');
     const total = data.data;
-  
-    console.log(total.length);
+
+    all = total;
+    openIssues = total.filter(item => item.status === 'open');
+    closedIssues = total.filter(item => item.status === 'closed');
+
+    totalCount.innerText = total.length;
 
     all = total;
     allSection.innerHTML = '';
@@ -37,12 +43,15 @@ function btnClick(id) {
     selected.classList.add('bg-blue-700', 'text-white');
 
     if (id == 'all') {
+        totalCount.innerText = all.length;
         tracker(all);
     }
     else if (id == 'open') {
+        totalCount.innerText = openIssues.length;
         const open = all.filter(item => item.status === 'open');
         tracker(open);
     } else {
+        totalCount.innerText = closedIssues.length;
         const closed = all.filter(item => item.status === 'closed');
         tracker(closed);
     }
@@ -54,7 +63,6 @@ async function showModalBtn(id) {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
     showModal(data.data);
-    // my_modal_5.showModal();
 };
 function showModal(id) {
     const datas = document.getElementById('modal');
@@ -141,14 +149,11 @@ allTracker();
 document.getElementById("btn-search").addEventListener('click', function () {
     const input = document.getElementById('input-search');
     const searchValue = input.value.trim().toLowerCase();
-    // console.log(searchValue);
-
-    fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q={searchText}')
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
         .then(res => res.json())
         .then(data => {
-            const word = data.data;
-            // console.log(word);
-            const filterWord = word.filter(words => words.title.toLowerCase().includes(searchValue));
-            tracker(filterWord);
+            const result = data.data;
+            tracker(result);
         });
-})
+
+});

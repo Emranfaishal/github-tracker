@@ -34,7 +34,8 @@
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <input id="input-search" type="text" placeholder="Search issues..." class="input input-bordered w-24 md:w-auto" />
+                    <input id="input-search" type="text" placeholder="Search issues..."
+                        class="input input-bordered w-24 md:w-auto" />
                     <button id="btn-search" class="btn btn-primary"><i class="fa-solid fa-plus"></i> New Issue</button>
                 </div>
             </div>
@@ -43,7 +44,7 @@
     <main>
 
         <section class="flex gap-5 bg-white rounded-sm shadow-2xl p-5 mt-10">
-            <button onclick="btnClick('all')" id="all" class="btn shadow">All</button>
+            <button onclick="btnClick('all')" id="all" class="bg-blue-700 text-white btn shadow">All</button>
             <button onclick="btnClick('open')" id="open" class="btn shadow">Open</button>
             <button onclick="btnClick('closed')" id="closed" class="btn shadow">Closed</button>
         </section>
@@ -56,7 +57,10 @@
                         <i class="w-ful h-full fa-brands fa-microsoft"></i>
                     </div>
                     <div>
-                        <p class="font-semibold"><span id="total">0</span> Issues</p>
+                        <p class="font-semibold">
+                            <span id="total">0</span>
+                            Issues
+                        </p>
                         <p class="text-[#64748B]">Track and manage your project issues</p>
                     </div>
                 </div>
