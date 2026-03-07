@@ -43,9 +43,12 @@
     <main class="w-10/12 mx-auto">
 
         <section class="flex gap-5 bg-white rounded-sm shadow-2xl p-5 mt-10">
-            <button class="btn btn-soft btn-primary">All</button>
-            <button class="btn btn-soft btn-primary">Open</button>
-            <button class="btn btn-soft btn-primary">Closed</button>
+            <button onclick="btnClick('all')" id="all"
+                class="p-4 border rounded-2xl shadow">All</button>
+            <button onclick="btnClick('open')" id="open"
+                class="p-4 border rounded-2xl shadow">Open</button>
+            <button onclick="btnClick('closed')" id="closed"
+                class="p-4 border rounded-2xl shadow">Closed</button>
         </section>
 
         <section class="navbar bg-base-100 rounded-sm shadow-sm p-5 mt-10">

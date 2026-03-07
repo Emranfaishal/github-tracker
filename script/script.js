@@ -11,8 +11,6 @@ loginBtn.addEventListener('click', function () {
     const pin = inputPin.value;
     // console.log(pin);
     if (username == "admin" && pin == "admin123") {
-        // alert('login right');
-        // window.location.replace('/allTracker.html');
         window.location.assign('/allTracker.html');
     } else {
         alert('login Failed');

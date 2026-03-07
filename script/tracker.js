@@ -1,6 +1,10 @@
-const allButton = document.getElementById('allBtn');
+const allButton = document.getElementById('all');
+const openButton = document.getElementById('open');
+const closedButton = document.getElementById('closed');
 const allSection = document.getElementById('all-section');
 const loadingSpinner = document.getElementById('loading-spinner');
+
+let all = [];
 
 async function allTracker() {
     loadingSpinner.classList.remove('hidden');
@@ -9,13 +13,41 @@ async function allTracker() {
     const data = await res.json();
     loadingSpinner.classList.add('hidden');
     const total = data.data;
+    all = data.data
     allSection.innerHTML = '';
     tracker(total);
 }
 
+function btnClick(id) {
+
+    allButton.classList.remove('bg-blue-700', 'text-white');
+    openButton.classList.remove('bg-blue-700', 'text-white');
+    closedButton.classList.remove('bg-blue-700', 'text-white');
+
+    allButton.classList.add('bg-white', 'text-black');
+    openButton.classList.add('bg-white', 'text-black');
+    closedButton.classList.add('bg-white', 'text-black');
+    const selected = document.getElementById(id);
+
+    selected.classList.remove('bg-white', 'text-black');
+    selected.classList.add('bg-blue-700', 'text-white');
+    if (id == 'all') {
+        tracker(all);
+    }
+    else if (id == 'open') {
+        const open = all.filter(item => item.status === 'open');
+        tracker(open);
+    } else {
+        const closed = all.filter(item => item.status === 'closed');
+        tracker(closed);
+    }
+
+}
+
 function tracker(events) {
+    allSection.innerHTML = '';
     events.forEach(event => {
-        // console.log(event);
+
         const card = document.createElement('div');
         card.className = 'bg-white rounded-sm shadow-2xl p-7 space-y-4';
         card.innerHTML = `
