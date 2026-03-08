@@ -27,7 +27,6 @@
 </head>
 
 <body class="w-10/12 mx-auto">
-    <!-- header title tag  -->
     <header>
         <nav class="mt-2">
             <div class="navbar bg-base-100 shadow-sm">
@@ -46,7 +45,6 @@
         </nav>
     </header>
     <main>
-
         <section class="flex gap-5 bg-white rounded-sm shadow-2xl p-5 mt-10">
             <button onclick="btnClick('all')" id="all" class="bg-blue-700 text-white btn shadow">All</button>
             <button onclick="btnClick('open')" id="open" class="btn shadow">Open</button>
@@ -79,28 +77,21 @@
         </section>
 
         <section class="mt-10">
-
             <div id="loading-spinner" class="justify-center items-center p-20 hidden">
                 <span class="loading loading-spinner text-warning"></span>
             </div>
-
             <div id="all-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
             </div>
-
         </section>
 
         <section>
-            <!-- Open the modal using ID.showModal() method -->
             <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
                 <div id="modal" class="modal-box space-y-4">
 
                 </div>
             </dialog>
         </section>
-
-
-
     </main>
     <script src="tracker.js"></script>
 </body>

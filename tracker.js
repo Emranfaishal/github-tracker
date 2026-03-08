@@ -62,23 +62,6 @@ function btnClick(id) {
     }
 };
 
-btnSearch.addEventListener('click', function () {
-    const searchValue = inputSearch.value.trim().toLowerCase();
-    if (searchValue === '') {
-        totalCount.innerText = all.length;
-        tracker(all);
-        return;
-    }
-    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
-        .then(res => res.json())
-        .then(data => {
-            const result = data.data;
-            totalCount.innerText = result.length;
-            tracker(result);
-        });
-});
-
-
 async function showModalBtn(id) {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
@@ -125,6 +108,22 @@ function showModal(id) {
     document.getElementById('my_modal_5').showModal();
 
 };
+
+btnSearch.addEventListener('click', function () {
+    const searchValue = inputSearch.value.trim().toLowerCase();
+    if (searchValue === '') {
+        totalCount.innerText = all.length;
+        tracker(all);
+        return;
+    }
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+        .then(res => res.json())
+        .then(data => {
+            const result = data.data;
+            totalCount.innerText = result.length;
+            tracker(result);
+        });
+});
 
 function tracker(events) {
     allSection.innerHTML = '';
