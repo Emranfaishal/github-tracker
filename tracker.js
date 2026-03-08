@@ -1,13 +1,16 @@
+let all = [];
+let openIssues = [];
+let closedIssues = [];
+
 const allButton = document.getElementById('all');
 const openButton = document.getElementById('open');
 const closedButton = document.getElementById('closed');
 const allSection = document.getElementById('all-section');
 const loadingSpinner = document.getElementById('loading-spinner');
 const totalCount = document.getElementById('total');
+const btnSearch = document.getElementById('btn-search');
+const inputSearch = document.getElementById('input-search');
 
-let all = [];
-let openIssues = [];
-let closedIssues = [];
 
 async function allTracker() {
     loadingSpinner.classList.remove('hidden');
@@ -15,6 +18,7 @@ async function allTracker() {
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
     loadingSpinner.classList.add('hidden');
+
     const total = data.data;
 
     all = total;
@@ -50,13 +54,29 @@ function btnClick(id) {
         totalCount.innerText = openIssues.length;
         const open = all.filter(item => item.status === 'open');
         tracker(open);
-    } else {
+    }
+    else {
         totalCount.innerText = closedIssues.length;
         const closed = all.filter(item => item.status === 'closed');
         tracker(closed);
     }
+};
 
-}
+btnSearch.addEventListener('click', function () {
+    const searchValue = inputSearch.value.trim().toLowerCase();
+    if (searchValue === '') {
+        totalCount.innerText = all.length;
+        tracker(all);
+        return;
+    }
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+        .then(res => res.json())
+        .then(data => {
+            const result = data.data;
+            totalCount.innerText = result.length;
+            tracker(result);
+        });
+});
 
 
 async function showModalBtn(id) {
@@ -65,8 +85,8 @@ async function showModalBtn(id) {
     showModal(data.data);
 };
 function showModal(id) {
-    const datas = document.getElementById('modal');
-    datas.innerHTML = `
+    const data = document.getElementById('modal');
+    data.innerHTML = `
 
                 <h2 class="text-2xl font-bold">${id.title}</h2>
                 <div class="flex items-center gap-5">
@@ -104,7 +124,7 @@ function showModal(id) {
     `;
     document.getElementById('my_modal_5').showModal();
 
-}
+};
 
 function tracker(events) {
     allSection.innerHTML = '';
@@ -113,6 +133,7 @@ function tracker(events) {
         card.className = `bg-white rounded-sm shadow-2xl p-5 border-t-5 ${event.status == "open" ? "border-green-500" : "border-[#A855F7]"}`;
         card.innerHTML = `
                 <div onclick="showModalBtn(${event.id})" class="space-y-4">
+
                     <div class="flex justify-between items-center">
                         <p>${event.status == 'open' ? '<i class="fa-brands fa-phoenix-framework text-green-600"></i>' : '<i class="fa-regular fa-circle-check text-[#A855F7]"></i>'}</p>
                         <p class="bg-[#FEECEC] btn btn shadow pl-4 pr-4 rounded-2xl">${event.priority}</p>
@@ -141,19 +162,6 @@ function tracker(events) {
                 </div>
         `;
         allSection.appendChild(card);
-
     });
 };
 allTracker();
-
-document.getElementById("btn-search").addEventListener('click', function () {
-    const input = document.getElementById('input-search');
-    const searchValue = input.value.trim().toLowerCase();
-    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
-        .then(res => res.json())
-        .then(data => {
-            const result = data.data;
-            tracker(result);
-        });
-
-});
